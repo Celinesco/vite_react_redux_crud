@@ -13,6 +13,9 @@ const UserForm = ({ editForm, setEditForm }: UserFormProps) => {
     const { addUser, edit } = useUserActions();
     const [result, setResult] = useState<'ok' | 'ko' | null>(null);
     const [formFields, setFormFields] = useState<UserWithId>(editForm.user)
+    let newUser = {
+        id: "", name: "", email: "", github: ""
+    }
 
     useEffect(() => {
         setFormFields(editForm.user)
@@ -23,7 +26,6 @@ const UserForm = ({ editForm, setEditForm }: UserFormProps) => {
             [e.target.name]: e.target.value
         }))
     }
-
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -58,14 +60,19 @@ const UserForm = ({ editForm, setEditForm }: UserFormProps) => {
         }
 
         setResult('ok');
-        setEditForm({ user: { id: "", name: "", email: "", github: "" }, edit: false })
+        setEditForm({ user: newUser, edit: false })
         form.reset()
         setTimeout(() => {
             setResult(null)
         }, 1500)
     }
+
+    const handleCancel = () => {
+        setEditForm({ user: newUser, edit: false })
+    }
+
     return (
-        <Card style={{ marginTop: 16 }}>
+        <Card style={{ marginTop: 16 }} className='mb-5'>
             <Title>{!editForm.edit ? 'Crear nuevo usuario' : 'Editar usuario'}</Title>
             <form onSubmit={handleSubmit} >
                 <TextInput
@@ -77,7 +84,11 @@ const UserForm = ({ editForm, setEditForm }: UserFormProps) => {
                 <TextInput
                     className='my-2'
                     name="github" placeholder='Github' value={formFields.github} onChange={handleChange} />
-                <Button >{!editForm.edit ? 'Crear' : 'Editar'}</Button>
+                <div className="flex justify-end">
+                    <Button type="submit" className='mr-2'>{!editForm.edit ? 'Crear' : 'Editar'}</Button>
+                    <Button type="button" color="pink" onClick={handleCancel}>Cancelar</Button>
+                </div>
+
                 <span>{result === 'ok' && <Badge color="green">Exitoso!</Badge>}
                     {result === 'ko' && <Badge color="red">Error</Badge>}</span>
             </form>

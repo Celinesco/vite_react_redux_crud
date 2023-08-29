@@ -21,7 +21,6 @@ const syncWithDataBase: Middleware = (store) => (next) => (action) => {
 
   next(action);
   if (type === "users/editUser") {
-    console.log("emntro");
   }
   if (type === "users/deleteUserById") {
     const userIdToRemove = payload;
