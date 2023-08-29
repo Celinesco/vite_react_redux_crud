@@ -2,6 +2,7 @@ import { Title } from '@tremor/react';
 import './App.css';
 import CreateNewUser from './users/components/CreateNewUser';
 import ListOfUsers from './users/components/ListOfUsers';
+import { Toaster } from 'sonner';
 
 function App() {
 
@@ -11,6 +12,7 @@ function App() {
       <Title>Practica Redux</Title>
       <CreateNewUser />
       <ListOfUsers />
+      <Toaster richColors />
     </>
   )
 }

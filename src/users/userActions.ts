@@ -1,5 +1,12 @@
 /** @format */
-import { deleteUserById, UserId, addNewUser, User } from "./user-slice";
+import {
+  deleteUserById,
+  UserId,
+  addNewUser,
+  User,
+  rollbackUser,
+  UserWithId,
+} from "./user-slice";
 import { useAppDispatch } from "../hooks/store";
 
 export const useUserActions = () => {
@@ -10,10 +17,14 @@ export const useUserActions = () => {
   const addUser = ({ name, email, github }: User) => {
     dispatch(addNewUser({ name, email, github }));
   };
+  const rollback = (props: UserWithId) => {
+    dispatch(rollbackUser(props));
+  };
 
   return {
     handleDeleteUser,
     addUser,
+    rollback,
   };
 };
 
