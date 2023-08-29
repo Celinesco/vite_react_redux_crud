@@ -10,41 +10,12 @@ import {
     TableBody,
     Title,
     Badge,
-} from "@tremor/react";
-
-const users: {
-    name: string;
-    id: string;
-    email: string;
-    github: string;
-}[] = [
-        {
-            name: "Peter Doe",
-            id: "0",
-            email: "peterdoe@gmail.com",
-            github: "peterpeter",
-        },
-        {
-            name: "Lena Whitehouse",
-            id: "1",
-            email: "lenawhitehouse@gmail.com",
-            github: "lenawhite",
-        },
-        {
-            name: "Phil Less",
-            id: "2",
-            email: "philless@gmail.com",
-            github: "philless",
-        },
-        {
-            name: "John Camper",
-            id: "3",
-            email: "390,000",
-            github: "250,000",
-        },
-    ];
+} from "@tremor/react";/* para leer la store */
+import { useAppSelector } from "../store/hooks/store";
 
 export default function ListOfUsers() {
+    const users = useAppSelector((state) => state.users)
+    // este users viene de la store. dentro del reducer
     return (
         <Card>
             <Title>
