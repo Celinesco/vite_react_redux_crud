@@ -20,6 +20,9 @@ const syncWithDataBase: Middleware = (store) => (next) => (action) => {
   const previousState = store.getState();
 
   next(action);
+  if (type === "users/editUser") {
+    console.log("emntro");
+  }
   if (type === "users/deleteUserById") {
     const userIdToRemove = payload;
     const userToRemove: UserWithId | undefined = previousState.users.find(
@@ -33,7 +36,6 @@ const syncWithDataBase: Middleware = (store) => (next) => (action) => {
       .then((res) => {
         res.ok &&
           toast.success(`El usuario ${userIdToRemove} ha sido eliminado`);
-        throw new Error("Error al eliminar el usuario");
       })
       .catch((err) => {
         toast.error("Error al eliminar usuario");

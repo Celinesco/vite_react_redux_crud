@@ -13,13 +13,22 @@ import {
 } from "@tremor/react";/* para leer la store */
 import { useAppSelector } from "../../hooks/store";
 import { useUserActions } from "../userActions";
+import { Dispatch, SetStateAction } from "react";
+import { UserWithId } from "../user-slice";
 
 // deleteUserById es la accion que viaja
 // handleDelete es el dispatch, osea lo que despacha la accion
+interface ListOfUsersProps {
+    setEditForm: Dispatch<SetStateAction<{ user: UserWithId, edit: boolean }>>
+}
 
-export default function ListOfUsers() {
+
+export default function ListOfUsers({ setEditForm }: ListOfUsersProps) {
     const users = useAppSelector((state) => state.users);
     const { handleDeleteUser } = useUserActions();
+    const handleEdit = (item: UserWithId) => {
+        setEditForm({ user: item, edit: true });
+    }
     // este users viene de la store. dentro del reducer
     return (
         <Card>
@@ -40,13 +49,13 @@ export default function ListOfUsers() {
                 <TableBody>
                     {users.map((item) => (
                         <TableRow key={item.id}>
-                            <TableCell>{item.id}</TableCell>
+                            <TableCell>{item.id.slice(0, 5)}</TableCell>
                             <TableCell style={{ display: "flex", alignItems: "center" }}>
                                 <img src={`https://unavatar.io/github/${item.github}`} alt={item.name} style={{ width: 32, height: 32, borderRadius: '100%', marginRight: 8 }} />
                                 {item.name}</TableCell>
                             <TableCell >{item.email}</TableCell>
                             <TableCell>
-                                <button type="button">
+                                <button type="button" onClick={() => { handleEdit(item) }}>
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                                         <path strokeLinecap="round" strokeLinejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
                                     </svg>

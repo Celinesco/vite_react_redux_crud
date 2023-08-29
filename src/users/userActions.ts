@@ -6,6 +6,7 @@ import {
   User,
   rollbackUser,
   UserWithId,
+  editUser,
 } from "./user-slice";
 import { useAppDispatch } from "../hooks/store";
 
@@ -20,11 +21,15 @@ export const useUserActions = () => {
   const rollback = (props: UserWithId) => {
     dispatch(rollbackUser(props));
   };
+  const edit = (props: UserWithId) => {
+    dispatch(editUser(props));
+  };
 
   return {
     handleDeleteUser,
     addUser,
     rollback,
+    edit,
   };
 };
 
