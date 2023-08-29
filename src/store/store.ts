@@ -1,6 +1,6 @@
 /** @format */
 import { configureStore } from "@reduxjs/toolkit";
-import userReducer from "./users/user-slice";
+import userReducer from "../users/user-slice";
 
 // en store va todo. Nuestro estado, las acciones, los reducers.
 //  el store para estar organizado se divide en slice, porciones
