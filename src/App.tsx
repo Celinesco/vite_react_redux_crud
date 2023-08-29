@@ -1,12 +1,15 @@
+import { Title } from '@tremor/react';
 import './App.css';
-import ListOfUsers from './components/ListOfUsers';
+import CreateNewUser from './users/components/CreateNewUser';
+import ListOfUsers from './users/components/ListOfUsers';
 
 function App() {
 
 
   return (
     <>
-      <h1>Practica Redux</h1>
+      <Title>Practica Redux</Title>
+      <CreateNewUser />
       <ListOfUsers />
     </>
   )

@@ -5,10 +5,19 @@ import userReducer from "../users/user-slice";
 // en store va todo. Nuestro estado, las acciones, los reducers.
 //  el store para estar organizado se divide en slice, porciones
 
+// En esta funcion los parametros no se pasan todos juntos, porque se ejectuan paso a paso
+const persistanceLocalStorage = (store) => (next) => (action) => {
+  //   console.log("Estado anterior", store.getState());
+  next(action);
+  //   console.log("Estado posterior", store.getState());
+  localStorage.setItem("__redux__state__", JSON.stringify(store.getState()));
+};
+
 export const store = configureStore({
   reducer: {
     users: userReducer,
   },
+  middleware: [persistanceLocalStorage],
 });
 
 // Infer the `RootState` and `AppDispatch` types from the store itself

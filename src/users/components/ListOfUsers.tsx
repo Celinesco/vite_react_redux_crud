@@ -11,8 +11,8 @@ import {
     Title,
     Badge,
 } from "@tremor/react";/* para leer la store */
-import { useAppSelector } from "../hooks/store";
-import { useUserActions } from "../users/userActions";
+import { useAppSelector } from "../../hooks/store";
+import { useUserActions } from "../userActions";
 
 // deleteUserById es la accion que viaja
 // handleDelete es el dispatch, osea lo que despacha la accion

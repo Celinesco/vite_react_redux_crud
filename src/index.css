@@ -5,6 +5,7 @@
 
 
 body {
+  background: black;
   margin-left: auto;
   margin-right: auto;
   display: flex;
@@ -18,7 +19,7 @@ h1 {
   line-height: 1.1;
 }
 
-
+/* 
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
@@ -30,4 +31,4 @@ h1 {
   button {
     background-color: #f9f9f9;
   }
-}
+} */
